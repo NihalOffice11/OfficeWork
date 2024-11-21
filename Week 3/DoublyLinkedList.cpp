@@ -11,17 +11,12 @@ public:
         next = nullptr;
         prev = nullptr;
     }
-
-
-
-
-
 };
 
 class DoublyLinkedList {
 private:
     Node* head;
-public:
+public: 
     DoublyLinkedList() {
         head = nullptr;
     }
