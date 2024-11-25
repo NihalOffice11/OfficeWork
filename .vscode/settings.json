@@ -10,7 +10,8 @@
         "forward_list": "cpp",
         "list": "cpp",
         "vector": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "iosfwd": "cpp"
     },
     "editor.tabCompletion": "on",
     "editor.suggest.localityBonus": true,
