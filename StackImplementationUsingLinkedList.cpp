@@ -1,51 +1,70 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-template<class T> 
-class Node{
-    public:
-        T data;
-        Node<T>* next;
-    
-        Node(T data){
-            this->data = data;
-        }
+template <class T>
+class Node
+{
+public:
+    T data;
+    Node<T> *next;
+
+    Node(T data)
+    {
+        this->data = data;
+    }
 };
 
-template<class T>
-class Stack{
-    public:
-        int size;
-        Node<T> *top;
-    Stack(){
+template <class T>
+class Stack
+{
+public:
+    int size;
+    Node<T> *top;
+    Stack()
+    {
         top = NULL;
         size = 0;
     }
 
-    void push(T data){
-        Node<T>* newstack = new Node<T>(data);
+    void push(T data)
+    {
+        Node<T> *newstack = new Node<T>(data);
+
+        newstack->next = top;
+        top = newstack;
+
+        size++;
+    }
+
+    void pop(){
         if(top == NULL){
-            top = newstack;
+            cout<<"Stack Underflow "<<endl;
         }
         else{
-            newstack->next = top;
-            top = newstack;
+            Node<T>* temp = top;
+            top = top->next;
+            delete temp;
+
         }
-        size++;
-        cout<<"Node Inserted "<<endl;
     }
 
-    void display(){
-    Node<T>* temp = top;
-    while(temp->next != NULL){
-        cout << temp->data << " "; 
-        temp = temp->next;
+    T peek(){
+        return top->data;
     }
-    cout << endl; 
-}
 
+    void display()
+    {
+        Node<T> *temp = top;
+        while (temp != NULL)
+        {
+            cout << temp->data << endl <<" | "<<endl;
+            temp = temp->next;
+        }
+        cout << endl;
+    }
 };
-int main(){
-    
+int main()
+{
+
     Stack<int> s;
     s.push(21);
     s.push(2);
@@ -53,7 +72,10 @@ int main(){
     s.push(1);
     s.push(41);
     s.push(111);
-    
+
+    s.pop();
     s.display();
+    cout<<s.peek()<<endl;
+    
     return 0;
 }
