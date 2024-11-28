@@ -35,9 +35,10 @@ public:
         size++;
     }
 
-    void pop(){
+    int pop(){
         if(top == NULL){
             cout<<"Stack Underflow "<<endl;
+            return -1;
         }
         else{
             Node<T>* temp = top;
@@ -45,6 +46,7 @@ public:
             delete temp;
 
         }
+        return 0;
     }
 
     T peek(){
@@ -66,6 +68,7 @@ int main()
 {
 
     Stack<int> s;
+    
     s.push(21);
     s.push(2);
     s.push(23);
