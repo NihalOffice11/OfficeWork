@@ -77,126 +77,135 @@ int main() {
 
 
 
+
+
 #include <iostream>
 using namespace std;
 
-// Define the structure for a node in the binary tree
-struct Node {
-    int data;
+template <typename T>
+class Node{
+public:
+    T value;
     Node* left;
     Node* right;
-
-    // Constructor to create a new node
-    Node(int value) {
-        data = value;
-        left = nullptr;
-        right = nullptr;
+    Node() {
+        value = NULL;
+        left = right = nullptr;
+    }
+    Node(T data) {
+        value = data;
+        left = right = nullptr;     
     }
 };
 
-// BinaryTree class to manage tree operations
+template <typename T>
 class BinaryTree {
 public:
-    Node* root;
+    Node<T>* root;
 
-    // Constructor to initialize the tree
     BinaryTree() {
         root = nullptr;
     }
 
-    // Function to insert a new node in the binary tree
-    void insert(int value) {
-        root = insertRec(root, value);
-    }
-
-    // Function to perform in-order traversal of the tree
-    void inorder() {
-        inorderRec(root);
-        cout << endl;
-    }
-
-    // Function to perform pre-order traversal of the tree
-    void preorder() {
-        preorderRec(root);
-        cout << endl;
-    }
-
-    // Function to perform post-order traversal of the tree
-    void postorder() {
-        postorderRec(root);
-        cout << endl;
-    }
-
-private:
-    // Recursive function to insert a new node
-    Node* insertRec(Node* node, int value) {
-        if (node == nullptr) {
-            return new Node(value);
+    void insertLeaves(T data, Node<T>*&root1) {
+        Node<T>* temp = new Node<T>(data);
+        if (root1 == nullptr) {
+            root1 = temp;
         }
-
-        // Insert to the left child if it is empty
-        if (node->left == nullptr) {
-            node->left = new Node(value);
+        else if (root1->left == nullptr) {
+            root1->left = temp;
         }
-        // Otherwise, insert to the right child if it is empty
-        else if (node->right == nullptr) {
-            node->right = new Node(value);
+        else if (root1->right == nullptr) {
+            root1->right = temp;
         }
-        // If both left and right children are occupied, recursively insert in left or right subtrees
+        else if(root1->left->left == nullptr || root1->left->right == nullptr){
+            insertLeaves(data, root1->left);
+        }
+        else if (root1->right->left == nullptr || root1->right->right == nullptr) {
+            insertLeaves(data, root1->right);
+        }
         else {
-            insertRec(node->left, value);  // Insertion to left first if both children are occupied
+            insertLeaves(data, root1->left);
+        }
+    }
+
+    void deleteDeepest(Node<T>*& root1) {
+        if (root1 == nullptr)return;
+        if (root1->left == nullptr) root1 = nullptr;
+        else { 
+            deleteDeepest(root1->left);
+            deleteDeepest(root1->right);
+        }
+    }
+
+    void inOrder(Node<T>* node) {
+        if (node == nullptr) {
+            return;
+        }
+        else {
+            inOrder(node->left);
+            cout << node->value << " ";
+            inOrder(node->right);
         }
 
-        return node;
+    }
+    void preOrder(Node<T>* node) {
+        if (node == nullptr) {
+            return;
+        }
+        else {
+            cout << node->value << " ";
+            preOrder(node->left);
+            preOrder(node->right);
+        }
+
     }
 
-    // Recursive function for in-order traversal
-    void inorderRec(Node* node) {
-        if (node == nullptr) return;
-        inorderRec(node->left);
-        cout << node->data << " ";
-        inorderRec(node->right);
+    void postOrder(Node<T>* node) {
+        if (node == nullptr) {
+            return;
+        }
+        else {
+            postOrder(node->left);
+            postOrder(node->right);
+            cout << node->value << " ";
+        }
+
     }
 
-    // Recursive function for pre-order traversal
-    void preorderRec(Node* node) {
-        if (node == nullptr) return;
-        cout << node->data << " ";
-        preorderRec(node->left);
-        preorderRec(node->right);
-    }
 
-    // Recursive function for post-order traversal
-    void postorderRec(Node* node) {
-        if (node == nullptr) return;
-        postorderRec(node->left);
-        postorderRec(node->right);
-        cout << node->data << " ";
-    }
 };
 
-int main() {
-    BinaryTree tree;
+int main()
+{
+    std::cout << "---------- Binary Tree ----------"<<endl<<endl;
 
-    // Insert elements into the binary tree
-    tree.insert(1);
-    tree.insert(2);
-    tree.insert(3);
-    tree.insert(4);
-    tree.insert(5);
-    tree.insert(6);
-    tree.insert(7);
-
-    // Print the tree traversals
-    cout << "In-order traversal: ";
-    tree.inorder(); // Expected output: 4 2 5 1 6 3 7
-
-    cout << "Pre-order traversal: ";
-    tree.preorder(); // Expected output: 1 2 4 5 3 6 7
-
-    cout << "Post-order traversal: ";
-    tree.postorder(); // Expected output: 4 5 2 6 7 3 1
+    BinaryTree<int> bt;
+    bt.insertLeaves(10, bt.root);
+    bt.insertLeaves(20, bt.root);
+    bt.insertLeaves(30, bt.root);
+    bt.insertLeaves(40, bt.root);
+    bt.insertLeaves(50, bt.root);
+    bt.insertLeaves(60, bt.root);
+    bt.insertLeaves(70, bt.root);
+    bt.insertLeaves(80, bt.root);
+    bt.insertLeaves(90, bt.root);
+    bt.insertLeaves(100, bt.root);
+    bt.insertLeaves(110,bt.root);
+    cout << "Inorder Traversal : " << endl;
+    bt.inOrder(bt.root); cout << endl<<endl;
+    cout << "Postorder Traversal : " << endl;
+    bt.postOrder(bt.root); cout << endl << endl;
+    cout << "Preorder Traversal : " << endl;
+    bt.preOrder(bt.root);
+    cout << endl << endl;
 
     return 0;
 }
+
+
+
+
+
+
 
