@@ -13,7 +13,9 @@
         "valarray": "cpp",
         "iosfwd": "cpp",
         "thread": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "array": "cpp",
+        "regex": "cpp"
     },
     "editor.tabCompletion": "on",
     "editor.suggest.localityBonus": true,

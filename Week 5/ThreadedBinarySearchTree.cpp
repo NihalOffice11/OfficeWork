@@ -7,7 +7,7 @@ class Node{
         Node* left;
         bool isThreaded;
 
-        Node(int data){
+        Node(int data){ 
             this->data = data;
             left = nullptr;
             right = nullptr;
@@ -100,6 +100,14 @@ int main(){
     tbst.insertNode(60);
     tbst.insertNode(80);
 
+
+    // tbst.insertNode(50);
+    // tbst.insertNode(60);
+    // tbst.insertNode(70);
+    // tbst.insertNode(12);
+    // tbst.insertNode(23);
+    // tbst.insertNode(13);
+   // tbst.insertNode(80);
     cout<<"Inorder Traversal (Non-Recursive): "<<endl;
     tbst.inorderTraversal();
 

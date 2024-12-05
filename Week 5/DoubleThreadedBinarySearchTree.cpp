@@ -43,7 +43,7 @@ public:
 
         while(curr != NULL){
             temparent = curr;
-            if(curr->data > val){
+            if(curr->data > val || curr->isleftThreaded){
                 if(curr->left == NULL){
                     break;
                 }
@@ -62,6 +62,10 @@ public:
         }
 
         if(temparent->data > val){
+            if(temparent->isleftThreaded){
+                newnode->left = temparent->left;
+                temparent->isleftThreaded = false;
+            }
             temparent->left = newnode;
             newnode->right = temparent;
             newnode->isrightThreaded = true;
@@ -70,17 +74,52 @@ public:
             if(temparent->isrightThreaded){
                 newnode->right = temparent->right;
                 temparent->isrightThreaded = false;
-                newnode->left = temparent
+              
             }
             temparent->right = newnode;
             newnode->left = temparent;
             newnode->isleftThreaded = true;
         }
     }
+
+    void inorderTraversal(){
+        Node* trav = root;
+        while(trav->left != nullptr && !trav->isleftThreaded){
+            
+                trav = trav->left;
+            
+        }
+
+        while(trav != nullptr){
+            cout<<trav->data<<" ";
+            if(trav->isrightThreaded){
+                trav = trav->right;
+            }
+            else{
+                trav = trav->right;
+                while(trav != nullptr && trav->left != nullptr && !trav->isleftThreaded){
+                    trav = trav->left;
+                }
+            }
+        }
+
+        cout<<endl;
+    }
 };
 
 int main()
 {
+    DoubleThreadedBinarySearchTree dtbst;
+    dtbst.insertNode(50);
+    dtbst.insertNode(30);
+    dtbst.insertNode(70);
+    dtbst.insertNode(20);
+    dtbst.insertNode(40);
+    dtbst.insertNode(60);
+    dtbst.insertNode(80);
+
+    dtbst.inorderTraversal();
 
     return 0;
 }
+

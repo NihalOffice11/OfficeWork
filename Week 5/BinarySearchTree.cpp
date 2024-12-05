@@ -83,6 +83,59 @@ class BinarySearchTree{
             cout<<endl;
         }
 
+        void reverseTraversal(Node* trav){
+            if(trav == NULL){
+                return;
+            
+            }
+            reverseTraversal(trav->right);
+            cout<<trav->data<<" ";
+            reverseTraversal(trav->left);
+        }
+
+        void reverseInorder(){
+            cout<<"Reverse Inorder Traversal: "<<endl;
+            reverseTraversal(root);
+            cout<<endl;
+        }
+
+        void nonRecursiveInorderTraversal(){
+            Node* trav = root;
+            stack<Node*> st;
+            cout<<"Non Recursive Inorder Traversal : ";
+            while(trav != NULL || !st.empty()){
+                if(trav != NULL){
+                    st.push(trav);
+                    trav = trav->left;
+                }
+                else{
+                    trav = st.top();
+                    cout<<trav->data<<" ";
+                    st.pop();
+                    trav = trav->right;
+                }
+            }
+
+        }
+
+        void NonRecursiveReverseInorderTraversal(){
+            Node* trav = root;
+            stack<Node*> st;
+            cout<<"Non Recursive Reverse Inorder Traversal: ";
+            while(trav != NULL || !st.empty()){
+                if(trav != NULL){
+                    st.push(trav);
+                    trav = trav->right;
+                }
+                else{
+                    trav = st.top();
+                    cout<<trav->data<<" ";
+                    st.pop();
+                    trav = trav->left;
+                }
+            }
+        }
+
 
         void postorderTraversal(Node* trav){
             if(trav == NULL){
@@ -232,6 +285,12 @@ int main(){
     bst.inorder();
     cout<<endl;
     bst.postorder();
+    cout<<endl;
+    bst.reverseInorder();
+    cout<<endl;
+    bst.nonRecursiveInorderTraversal();
+    cout<<endl;
+    bst.NonRecursiveReverseInorderTraversal();
     cout<<endl;
 
     cout<<bst.searchNodes(50)<<endl;
