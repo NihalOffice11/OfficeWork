@@ -11,7 +11,9 @@
         "list": "cpp",
         "vector": "cpp",
         "valarray": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "thread": "cpp",
+        "chrono": "cpp"
     },
     "editor.tabCompletion": "on",
     "editor.suggest.localityBonus": true,

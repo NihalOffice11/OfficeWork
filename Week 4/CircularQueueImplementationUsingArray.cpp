@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 class CircularQueue{
+    
     public:
         int arr[5];
         int front ;
