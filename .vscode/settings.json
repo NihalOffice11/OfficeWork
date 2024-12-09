@@ -1,0 +1,23 @@
+{
+    "files.autoSave": "afterDelay",
+    "files.associations": {
+        "string": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "new": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "vector": "cpp",
+        "valarray": "cpp",
+        "iosfwd": "cpp",
+        "thread": "cpp",
+        "chrono": "cpp",
+        "array": "cpp",
+        "regex": "cpp"
+    },
+    "editor.tabCompletion": "on",
+    "editor.suggest.localityBonus": true,
+    "emmet.showSuggestionsAsSnippets": true
+}
